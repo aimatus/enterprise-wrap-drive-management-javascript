@@ -57,6 +57,21 @@ class PlasmaReactor {
         });
         return finalInjectorFlows;
     }
+
+    getRemainingTravelTime(injectorPlasmaFlows) {
+        let remainingTime = 100;
+        if (injectorPlasmaFlows === 'Unable to comply') {
+            return '0 minutes';
+        }
+        for (let index = 0; index < this.plasmmaInjectors.length; index++) {
+            if (this.plasmmaInjectors[index].getDamagePercentage() < 100 && injectorPlasmaFlows[index] > 100) {
+                const timeConsumed =  injectorPlasmaFlows[index] -100;
+                remainingTime -= timeConsumed;
+                break;
+            }
+        }
+        return remainingTime === 100 ? 'Infinite' : remainingTime + ' minutes';
+    }
 }
 
 module.exports = PlasmaReactor;

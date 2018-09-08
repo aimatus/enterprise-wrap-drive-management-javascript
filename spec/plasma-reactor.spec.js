@@ -28,7 +28,9 @@ describe('PlasmaReactor', function() {
         const plasmaInjectors = getPlasmaInjectors(0, 0, 0);
         const expectedPlasmaInjectorsFlow = [ 100, 100, 100 ]
         const plasmaReactor = new PlasmaReactor(plasmaInjectors);
-        expect(plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage)).to.deep.equal(expectedPlasmaInjectorsFlow);
+        const plasmaInjectorFlows = plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage);
+        expect(plasmaInjectorFlows).to.deep.equal(expectedPlasmaInjectorsFlow);
+        expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('Infinite');
     });
 
     it('should return plasma flow for injectors array for case #2', function() {
@@ -36,7 +38,9 @@ describe('PlasmaReactor', function() {
         const plasmaInjectors = getPlasmaInjectors(0, 0, 0);
         const expectedPlasmaInjectorsFlow = [ 90, 90, 90 ]
         const plasmaReactor = new PlasmaReactor(plasmaInjectors);
-        expect(plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage)).to.deep.equal(expectedPlasmaInjectorsFlow);
+        const plasmaInjectorFlows = plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage);
+        expect(plasmaInjectorFlows).to.deep.equal(expectedPlasmaInjectorsFlow);
+        expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('Infinite');
     });
 
     it('should return plasma flow for injectors array for case #3', function() {
@@ -44,7 +48,9 @@ describe('PlasmaReactor', function() {
         const plasmaInjectors = getPlasmaInjectors(0, 0, 0);
         const expectedPlasmaInjectorsFlow = [ 30, 30, 30 ]
         const plasmaReactor = new PlasmaReactor(plasmaInjectors);
-        expect(plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage)).to.deep.equal(expectedPlasmaInjectorsFlow);
+        const plasmaInjectorFlows = plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage);
+        expect(plasmaInjectorFlows).to.deep.equal(expectedPlasmaInjectorsFlow);
+        expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('Infinite');
     });
 
     it('should return plasma flow for injectors array for case #4', function() {
@@ -52,7 +58,9 @@ describe('PlasmaReactor', function() {
         const plasmaInjectors = getPlasmaInjectors(20, 10, 0);
         const expectedPlasmaInjectorsFlow = [ 90, 100, 110 ]
         const plasmaReactor = new PlasmaReactor(plasmaInjectors);
-        expect(plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage)).to.deep.equal(expectedPlasmaInjectorsFlow);
+        const plasmaInjectorFlows = plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage);
+        expect(plasmaInjectorFlows).to.deep.equal(expectedPlasmaInjectorsFlow);
+        expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('90 minutes');
     });
 
     it('should return plasma flow for injectors array for case #5', function() {
@@ -60,7 +68,9 @@ describe('PlasmaReactor', function() {
         const plasmaInjectors = getPlasmaInjectors(0, 0, 100);
         const expectedPlasmaInjectorsFlow = [ 120, 120, 0 ]
         const plasmaReactor = new PlasmaReactor(plasmaInjectors);
-        expect(plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage)).to.deep.equal(expectedPlasmaInjectorsFlow);
+        const plasmaInjectorFlows = plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage);
+        expect(plasmaInjectorFlows).to.deep.equal(expectedPlasmaInjectorsFlow);
+        expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('80 minutes');
     });
 
     it('should return plasma flow for injectors array for case #6', function() {
@@ -68,7 +78,9 @@ describe('PlasmaReactor', function() {
         const plasmaInjectors = getPlasmaInjectors(0, 0, 0);
         const expectedPlasmaInjectorsFlow = [ 150, 150, 150 ]
         const plasmaReactor = new PlasmaReactor(plasmaInjectors);
-        expect(plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage)).to.deep.equal(expectedPlasmaInjectorsFlow);
+        const plasmaInjectorFlows = plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage);
+        expect(plasmaInjectorFlows).to.deep.equal(expectedPlasmaInjectorsFlow);
+        expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('50 minutes');
     });
 
     it('should return plasma flow for injectors array for case #7', function() {
@@ -76,7 +88,9 @@ describe('PlasmaReactor', function() {
         const plasmaInjectors = getPlasmaInjectors(0, 0, 30);
         const expectedPlasmaInjectorsFlow = [ 150, 150, 120 ]
         const plasmaReactor = new PlasmaReactor(plasmaInjectors);
-        expect(plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage)).to.deep.equal(expectedPlasmaInjectorsFlow);
+        const plasmaInjectorFlows = plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage);
+        expect(plasmaInjectorFlows).to.deep.equal(expectedPlasmaInjectorsFlow);
+        expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('50 minutes');
     });
 
     it('should return plasma flow for injectors array for case #8', function() {
@@ -84,7 +98,9 @@ describe('PlasmaReactor', function() {
         const plasmaInjectors = getPlasmaInjectors(20, 50, 40);
         const expectedPlasmaInjectorsFlow = 'Unable to comply'
         const plasmaReactor = new PlasmaReactor(plasmaInjectors);
-        expect(plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage)).to.equals(expectedPlasmaInjectorsFlow);
+        const plasmaInjectorFlows = plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage);
+        expect(plasmaInjectorFlows).to.deep.equal(expectedPlasmaInjectorsFlow);
+        expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('0 minutes');
     });
 
     getPlasmaInjectors = (firstInjectorDamage, secondInjectorDamage, thirdInjectorDamage) => {

@@ -4,6 +4,12 @@ const PlasmaInjector = require('../src/plasma-injector.js');
 
 describe('PlasmaInjector', function() {
   
+  it('should return proper initialized damage value', function() {
+    const damagePercentage = 20;
+    const plasmaInjector = new PlasmaInjector(damagePercentage);
+    expect(plasmaInjector.getDamagePercentage()).to.equal(damagePercentage);
+  });
+
   it('should return proper max undefined plasma flow', function() {
     const damagePercentage = 20;
     const expectedMaxUndefinedPlasmaFlow = 80;
