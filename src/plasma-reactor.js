@@ -12,9 +12,8 @@ class PlasmaReactor {
         const requiredPlasmaFlow = lightSpeedPercentage * plasmaFlowLightSpeedRatio;
         let plasmaInjectorsRequiredFlows = [];
         let currentPlasmaReactorFlow = 0;
-        let workingPlasmaReactors = 0;
 
-        if (this.getTotalReactorsMaxPlasmaFlow() < requiredPlasmaFlow) {
+        if (this.getTotalReactorsMaxAvailablePlasmaFlow() < requiredPlasmaFlow) {
             return 'Unable to comply';
         }
 
@@ -22,11 +21,9 @@ class PlasmaReactor {
             const maxUndefinedPlasmaFlow = plasmaInjector.getMaxUndefinedPlasmaFlow();
             plasmaInjectorsRequiredFlows.push(maxUndefinedPlasmaFlow);
             currentPlasmaReactorFlow += maxUndefinedPlasmaFlow;
-            if (maxUndefinedPlasmaFlow > 0) {
-                workingPlasmaReactors++;
-            }
         });
 
+        let workingPlasmaReactors = this.getWorkingPlasmaInjectors(plasmaInjectorsRequiredFlows);
         const necessaryExtraPlasmaFlow = (requiredPlasmaFlow - currentPlasmaReactorFlow) / workingPlasmaReactors;
 
         for (let index = 0; index < plasmaInjectorsRequiredFlows.length; index++) {
@@ -38,12 +35,22 @@ class PlasmaReactor {
         return plasmaInjectorsRequiredFlows;
     }
 
-    getTotalReactorsMaxPlasmaFlow() {
+    getTotalReactorsMaxAvailablePlasmaFlow() {
         let maxPlasmaFlow = 0;
         this.plasmmaInjectors.map((plasmaInjector) => {
             maxPlasmaFlow += plasmaInjector.getMaxPlasmaFlow();
         });
         return maxPlasmaFlow;
+    }
+
+    getWorkingPlasmaInjectors(plasmaInjectorsRequiredFlows) {
+        let workingPlasmaInjectors = 0;
+        plasmaInjectorsRequiredFlows.map((maxUndefinedPlasmaFlow) => {
+            if (maxUndefinedPlasmaFlow > 0) {
+                workingPlasmaInjectors++;
+            }
+        });
+        return workingPlasmaInjectors;
     }
 
 }
