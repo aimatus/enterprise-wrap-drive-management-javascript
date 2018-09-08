@@ -84,8 +84,7 @@ describe('PlasmaReactor', function() {
         const plasmaInjectors = getPlasmaInjectors(20, 50, 40);
         const expectedPlasmaInjectorsFlow = 'Unable to comply'
         const plasmaReactor = new PlasmaReactor(plasmaInjectors);
-        const result = plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage);
-        expect(result).to.equals(expectedPlasmaInjectorsFlow);
+        expect(plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage)).to.equals(expectedPlasmaInjectorsFlow);
     });
 
     getPlasmaInjectors = (firstInjectorDamage, secondInjectorDamage, thirdInjectorDamage) => {

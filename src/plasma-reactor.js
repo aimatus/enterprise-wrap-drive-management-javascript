@@ -23,16 +23,9 @@ class PlasmaReactor {
             currentPlasmaReactorFlow += maxUndefinedPlasmaFlow;
         });
 
-        let workingPlasmaReactors = this.getWorkingPlasmaInjectors(plasmaInjectorsRequiredFlows);
-        const necessaryExtraPlasmaFlow = (requiredPlasmaFlow - currentPlasmaReactorFlow) / workingPlasmaReactors;
+        const necessaryExtraPlasmaFlow = (requiredPlasmaFlow - currentPlasmaReactorFlow) / this.getWorkingPlasmaInjectorsQuantity(plasmaInjectorsRequiredFlows);
 
-        for (let index = 0; index < plasmaInjectorsRequiredFlows.length; index++) {
-            if (plasmaInjectorsRequiredFlows[index] > 0) {
-                plasmaInjectorsRequiredFlows[index] += necessaryExtraPlasmaFlow;
-            }
-        }
-
-        return plasmaInjectorsRequiredFlows;
+        return this.getFinalInjectorsFlows(plasmaInjectorsRequiredFlows, necessaryExtraPlasmaFlow);
     }
 
     getTotalReactorsMaxAvailablePlasmaFlow() {
@@ -43,7 +36,7 @@ class PlasmaReactor {
         return maxPlasmaFlow;
     }
 
-    getWorkingPlasmaInjectors(plasmaInjectorsRequiredFlows) {
+    getWorkingPlasmaInjectorsQuantity(plasmaInjectorsRequiredFlows) {
         let workingPlasmaInjectors = 0;
         plasmaInjectorsRequiredFlows.map((maxUndefinedPlasmaFlow) => {
             if (maxUndefinedPlasmaFlow > 0) {
@@ -53,6 +46,17 @@ class PlasmaReactor {
         return workingPlasmaInjectors;
     }
 
+    getFinalInjectorsFlows(plasmaInjectorsRequiredFlows, necessaryExtraPlasmaFlow) {
+        let finalInjectorFlows = [];
+        plasmaInjectorsRequiredFlows.map((injectorFlow) => {
+            if (injectorFlow > 0) {
+                finalInjectorFlows.push(injectorFlow + necessaryExtraPlasmaFlow);
+            } else {
+                finalInjectorFlows.push(0);
+            }
+        });
+        return finalInjectorFlows;
+    }
 }
 
 module.exports = PlasmaReactor;
