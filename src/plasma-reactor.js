@@ -14,6 +14,10 @@ class PlasmaReactor {
         let currentPlasmaReactorFlow = 0;
         let workingPlasmaReactors = 0;
 
+        if (this.getTotalReactorsMaxPlasmaFlow() < requiredPlasmaFlow) {
+            return 'Unable to comply';
+        }
+
         this.plasmmaInjectors.map((plasmaInjector) => {
             const maxUndefinedPlasmaFlow = plasmaInjector.getMaxUndefinedPlasmaFlow();
             plasmaInjectorsRequiredFlows.push(maxUndefinedPlasmaFlow);
@@ -32,6 +36,14 @@ class PlasmaReactor {
         }
 
         return plasmaInjectorsRequiredFlows;
+    }
+
+    getTotalReactorsMaxPlasmaFlow() {
+        let maxPlasmaFlow = 0;
+        this.plasmmaInjectors.map((plasmaInjector) => {
+            maxPlasmaFlow += plasmaInjector.getMaxPlasmaFlow();
+        });
+        return maxPlasmaFlow;
     }
 
 }
