@@ -1,6 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 const PlasmaReactor = require('../src/plasma-reactor.js');
+const PlasmaInjector = require('../src/plasma-injector.js');
 
 describe('PlasmaReactor', function() {
   
@@ -13,6 +14,45 @@ describe('PlasmaReactor', function() {
         const plasmaInjectors = 'not an array';
         const plasmaReactorConstructor = () => { new PlasmaReactor(plasmaInjectors) }
         expect(plasmaReactorConstructor).to.throw('PlasmaReactor object should receive an array as constructor parameter');
+    });
+
+    it('should return an array', function() {
+        const plasmaInjectors = [];
+        const plasmaReactor = new PlasmaReactor(plasmaInjectors);
+        const plasmaInjectorsFlow = plasmaReactor.calculateInjectorsPlasmaFlow();
+        expect(plasmaInjectorsFlow).to.be.an('array');
+    });
+
+    it('should return plasma flow for injectors array for case #1', function() {
+        const lightSpeedPercentage = 100;
+        const plasmaInjectors = [new PlasmaInjector(0), new PlasmaInjector(0), new PlasmaInjector(0)];
+        const expectedPlasmaInjectorsFlow = [ 100, 100, 100 ]
+        const plasmaReactor = new PlasmaReactor(plasmaInjectors);
+        expect(plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage)).to.deep.equal(expectedPlasmaInjectorsFlow);
+    });
+
+    it('should return plasma flow for injectors array for case #2', function() {
+        const lightSpeedPercentage = 90;
+        const plasmaInjectors = [new PlasmaInjector(0), new PlasmaInjector(0), new PlasmaInjector(0)];
+        const expectedPlasmaInjectorsFlow = [ 90, 90, 90 ]
+        const plasmaReactor = new PlasmaReactor(plasmaInjectors);
+        expect(plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage)).to.deep.equal(expectedPlasmaInjectorsFlow);
+    });
+
+    it('should return plasma flow for injectors array for case #3', function() {
+        const lightSpeedPercentage = 30;
+        const plasmaInjectors = [new PlasmaInjector(0), new PlasmaInjector(0), new PlasmaInjector(0)];
+        const expectedPlasmaInjectorsFlow = [ 30, 30, 30 ]
+        const plasmaReactor = new PlasmaReactor(plasmaInjectors);
+        expect(plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage)).to.deep.equal(expectedPlasmaInjectorsFlow);
+    });
+
+    it('should return plasma flow for injectors array for case #4', function() {
+        const lightSpeedPercentage = 100;
+        const plasmaInjectors = [new PlasmaInjector(20), new PlasmaInjector(10), new PlasmaInjector(0)];
+        const expectedPlasmaInjectorsFlow = [ 90, 100, 110 ]
+        const plasmaReactor = new PlasmaReactor(plasmaInjectors);
+        expect(plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage)).to.deep.equal(expectedPlasmaInjectorsFlow);
     });
   
   });
