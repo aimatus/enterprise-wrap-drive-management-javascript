@@ -1,9 +1,9 @@
-class PlasmaPropeller {
+class PlasmaInjector {
     
     constructor(damage) {
         this.damagePercentage = damage;
     }
-    
+
     getMaxUndefinedPlasmaFlow() {
         const maxUndefinedPlasmaFlow = 100;
         return maxUndefinedPlasmaFlow - this.damagePercentage;
@@ -17,4 +17,4 @@ class PlasmaPropeller {
 
 }
 
-module.exports = PlasmaPropeller;
+module.exports = PlasmaInjector;
