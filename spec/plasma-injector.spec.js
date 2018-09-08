@@ -29,7 +29,25 @@ describe('PlasmaInjector', function() {
   it('should return proper remaining travel working time in minutes when extra plasma flow is provided and has some damage', function() {
     const damagePercentage = 20;
     const desiredExtraPlasmaFlow = 50;
-    const expectedRemainingWorkingTimeInMinutes = 30;
+    const expectedRemainingWorkingTimeInMinutes = 50;
+    const plasmaInjector = new PlasmaInjector(damagePercentage);
+    const remainingWorkingTimeInMinutes = plasmaInjector.getRemainingWorkingTimeInMinutes(desiredExtraPlasmaFlow);
+    expect(remainingWorkingTimeInMinutes).to.equal(expectedRemainingWorkingTimeInMinutes);
+  });
+
+  it('should return proper remaining travel working time in minutes when extra plasma flow is provided and it is almost totally damaged', function() {
+    const damagePercentage = 99;
+    const desiredExtraPlasmaFlow = 99;
+    const expectedRemainingWorkingTimeInMinutes = 1;
+    const plasmaInjector = new PlasmaInjector(damagePercentage);
+    const remainingWorkingTimeInMinutes = plasmaInjector.getRemainingWorkingTimeInMinutes(desiredExtraPlasmaFlow);
+    expect(remainingWorkingTimeInMinutes).to.equal(expectedRemainingWorkingTimeInMinutes);
+  });
+
+  it('should return no remaining travel working time in minutes is 100% damaged', function() {
+    const damagePercentage = 100;
+    const desiredExtraPlasmaFlow = 99;
+    const expectedRemainingWorkingTimeInMinutes = 0;
     const plasmaInjector = new PlasmaInjector(damagePercentage);
     const remainingWorkingTimeInMinutes = plasmaInjector.getRemainingWorkingTimeInMinutes(desiredExtraPlasmaFlow);
     expect(remainingWorkingTimeInMinutes).to.equal(expectedRemainingWorkingTimeInMinutes);
