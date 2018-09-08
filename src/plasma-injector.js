@@ -17,6 +17,10 @@ class PlasmaInjector {
         return hasNoExtraPlasmaFlow ? 'infinite' : remainingWorkingTimeInMinutes;
     }
 
+    getMaxPlasmaFlow() {
+        return this.getMaxUndefinedPlasmaFlow() + 99;
+    }
+
 }
 
 module.exports = PlasmaInjector;

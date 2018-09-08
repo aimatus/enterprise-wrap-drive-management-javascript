@@ -53,4 +53,12 @@ describe('PlasmaInjector', function() {
     expect(remainingWorkingTimeInMinutes).to.equal(expectedRemainingWorkingTimeInMinutes);
   });
 
+  it('should return max plasma flow when using 99% extra power', function() {
+    const damagePercentage = 10;
+    const expectedMaxPlasmaFlow = 189;
+    const plasmaInjector = new PlasmaInjector(damagePercentage);
+    const actualMaxPlasmaFlow = plasmaInjector.getMaxPlasmaFlow();
+    expect(actualMaxPlasmaFlow).to.equal(expectedMaxPlasmaFlow);
+  });
+
 });
