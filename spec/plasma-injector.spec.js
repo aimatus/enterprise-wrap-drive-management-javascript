@@ -17,4 +17,28 @@ describe('PlasmaInjector', function() {
     expect(plasmaInjector.getMaxUndefinedPlasmaFlow()).to.equal(expectedMaxUndefinedPlasmaFlow);
   });
 
+  it('should return infinite remaining working time in minutes when no extra plasma flow is applied', function() {
+    const damagePercentage = 0;
+    const plasmaInjector = new PlasmaInjector(damagePercentage);
+    expect(plasmaInjector.getRemainingWorkingTimeInMinutes()).to.equal('infinite');
+  });
+
+  it('should return proper remaining travel working time in minutes when extra plasma flow is applied', function() {
+    const damagePercentage = 0;
+    const desiredExtraPlasmaFlow = 50;
+    const expectedRemainingWorkingTimeInMinutes = 50;
+    const plasmaInjector = new PlasmaInjector(damagePercentage);
+    plasmaInjector.setDesiredPlasmaFlow(desiredExtraPlasmaFlow);
+    expect(plasmaInjector.getRemainingWorkingTimeInMinutes()).to.equal(expectedRemainingWorkingTimeInMinutes);
+  });
+
+  it('should return proper remaining travel working time in minutes when extra plasma flow is applied and has some damage', function() {
+    const damagePercentage = 20;
+    const desiredExtraPlasmaFlow = 50;
+    const expectedRemainingWorkingTimeInMinutes = 30;
+    const plasmaInjector = new PlasmaInjector(damagePercentage);
+    plasmaInjector.setDesiredPlasmaFlow(desiredExtraPlasmaFlow);
+    expect(plasmaInjector.getRemainingWorkingTimeInMinutes()).to.equal(expectedRemainingWorkingTimeInMinutes);
+  });
+
 });
