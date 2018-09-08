@@ -8,9 +8,9 @@ class PlasmaPropeller {
         return this.damagePercentage;
     }
 
-    getMaxUndefinedWorkingCapacity() {
-        const maxUndefinedCapacity = 100;
-        return maxUndefinedCapacity - this.damagePercentage;
+    getMaxUndefinedPlasmaFlow() {
+        const maxUndefinedPlasmaFlow = 100;
+        return maxUndefinedPlasmaFlow - this.damagePercentage;
     }
 
 }
