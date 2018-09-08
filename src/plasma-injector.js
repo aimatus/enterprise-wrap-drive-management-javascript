@@ -7,6 +7,12 @@ class PlasmaPropeller {
     getDamagePercentage() {
         return this.damagePercentage;
     }
+
+    getMaxUndefinedWorkingCapacity() {
+        const maxUndefinedCapacity = 100;
+        return maxUndefinedCapacity - this.damagePercentage;
+    }
+
 }
 
 module.exports = PlasmaPropeller;
