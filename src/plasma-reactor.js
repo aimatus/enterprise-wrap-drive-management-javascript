@@ -64,7 +64,8 @@ class PlasmaReactor {
             return '0 minutes';
         }
         for (let index = 0; index < this.plasmmaInjectors.length; index++) {
-            if (this.plasmmaInjectors[index].getDamagePercentage() < 100 && injectorPlasmaFlows[index] > 100) {
+            const damagePercentage = this.plasmmaInjectors[index].getDamagePercentage();
+            if ( damagePercentage < 100 && injectorPlasmaFlows[index] > 100) {
                 const timeConsumed =  injectorPlasmaFlows[index] -100;
                 remainingTime -= timeConsumed;
                 break;

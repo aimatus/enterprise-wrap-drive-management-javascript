@@ -23,7 +23,7 @@ describe('PlasmaReactor', function() {
         expect(plasmaInjectorsFlow).to.be.an('array');
     });
 
-    it('should return plasma flow for injectors array for case #1', function() {
+    it('should return plasma flow array for injectors and remaining time for case #1', function() {
         const lightSpeedPercentage = 100;
         const plasmaInjectors = getPlasmaInjectors(0, 0, 0);
         const expectedPlasmaInjectorsFlow = [ 100, 100, 100 ]
@@ -33,7 +33,7 @@ describe('PlasmaReactor', function() {
         expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('Infinite');
     });
 
-    it('should return plasma flow for injectors array for case #2', function() {
+    it('should return plasma flow array for injectors and remaining time for case #2', function() {
         const lightSpeedPercentage = 90;
         const plasmaInjectors = getPlasmaInjectors(0, 0, 0);
         const expectedPlasmaInjectorsFlow = [ 90, 90, 90 ]
@@ -43,7 +43,7 @@ describe('PlasmaReactor', function() {
         expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('Infinite');
     });
 
-    it('should return plasma flow for injectors array for case #3', function() {
+    it('should return plasma flow array for injectors and remaining time for case #3', function() {
         const lightSpeedPercentage = 30;
         const plasmaInjectors = getPlasmaInjectors(0, 0, 0);
         const expectedPlasmaInjectorsFlow = [ 30, 30, 30 ]
@@ -53,7 +53,7 @@ describe('PlasmaReactor', function() {
         expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('Infinite');
     });
 
-    it('should return plasma flow for injectors array for case #4', function() {
+    it('should return plasma flow array for injectors and remaining time for case #4', function() {
         const lightSpeedPercentage = 100;
         const plasmaInjectors = getPlasmaInjectors(20, 10, 0);
         const expectedPlasmaInjectorsFlow = [ 90, 100, 110 ]
@@ -63,7 +63,7 @@ describe('PlasmaReactor', function() {
         expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('90 minutes');
     });
 
-    it('should return plasma flow for injectors array for case #5', function() {
+    it('should return plasma flow array for injectors and remaining time for case #5', function() {
         const lightSpeedPercentage = 80;
         const plasmaInjectors = getPlasmaInjectors(0, 0, 100);
         const expectedPlasmaInjectorsFlow = [ 120, 120, 0 ]
@@ -73,7 +73,7 @@ describe('PlasmaReactor', function() {
         expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('80 minutes');
     });
 
-    it('should return plasma flow for injectors array for case #6', function() {
+    it('should return plasma flow array for injectors and remaining time for case #6', function() {
         const lightSpeedPercentage = 150;
         const plasmaInjectors = getPlasmaInjectors(0, 0, 0);
         const expectedPlasmaInjectorsFlow = [ 150, 150, 150 ]
@@ -83,7 +83,7 @@ describe('PlasmaReactor', function() {
         expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('50 minutes');
     });
 
-    it('should return plasma flow for injectors array for case #7', function() {
+    it('should return plasma flow array for injectors and remaining time for case #7', function() {
         const lightSpeedPercentage = 140;
         const plasmaInjectors = getPlasmaInjectors(0, 0, 30);
         const expectedPlasmaInjectorsFlow = [ 150, 150, 120 ]
@@ -93,7 +93,7 @@ describe('PlasmaReactor', function() {
         expect(plasmaReactor.getRemainingTravelTime(plasmaInjectorFlows)).to.deep.equal('50 minutes');
     });
 
-    it('should return plasma flow for injectors array for case #8', function() {
+    it('should return plasma flow array for injectors and remaining time for case #8', function() {
         const lightSpeedPercentage = 170;
         const plasmaInjectors = getPlasmaInjectors(20, 50, 40);
         const expectedPlasmaInjectorsFlow = 'Unable to comply'
