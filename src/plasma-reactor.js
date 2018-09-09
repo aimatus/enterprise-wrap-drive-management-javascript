@@ -27,7 +27,7 @@ class PlasmaReactor {
 
         const plasmaDifference = requiredPlasmaFlow - currentPlasmaReactorFlow;
         const necessaryExtraPlasmaFlow = Math.round((plasmaDifference / this.getWorkingPlasmaInjectorsQuantity(plasmaInjectorsRequiredFlows)) * 100) / 100;   
-        injectorFlows = injectorFlows ? injectorFlows : this.getFinalInjectorsFlows(plasmaInjectorsRequiredFlows, necessaryExtraPlasmaFlow);
+        injectorFlows = this.getFinalInjectorsFlows(plasmaInjectorsRequiredFlows, necessaryExtraPlasmaFlow);
 
         if (necessaryExtraPlasmaFlow <= 0) {
             remainingTime = 'Infinite'

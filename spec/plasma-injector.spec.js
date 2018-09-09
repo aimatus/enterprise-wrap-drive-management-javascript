@@ -67,4 +67,12 @@ describe('PlasmaInjector', function() {
     expect(actualMaxPlasmaFlow).to.equal(expectedMaxPlasmaFlow);
   });
 
+  it('should return zero plasma flow when injector is totally damaged', function() {
+    const damagePercentage = 100;
+    const expectedMaxPlasmaFlow = 0;
+    const plasmaInjector = new PlasmaInjector(damagePercentage);
+    const actualMaxPlasmaFlow = plasmaInjector.getMaxPlasmaFlow();
+    expect(actualMaxPlasmaFlow).to.equal(expectedMaxPlasmaFlow);
+  });
+
 });
