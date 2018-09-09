@@ -16,7 +16,7 @@ class PlasmaReactor {
         let remainingTime = null;
 
         if (this.getTotalReactorsMaxAvailablePlasmaFlow() < requiredPlasmaFlow) {
-            injectorFlows = 'Unable to comply';
+            return { plasmaInjectorsFlow: 'Unable to comply', remainingTime: '0 minutes' }
         }
 
         this.plasmmaInjectors.map((plasmaInjector) => {
