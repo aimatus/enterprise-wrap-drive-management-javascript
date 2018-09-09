@@ -22,7 +22,7 @@ class PlasmaInjector {
     }
 
     getMaxPlasmaFlow() {
-        return this.getMaxUndefinedPlasmaFlow() + 99;
+        return this.damagePercentage === 100 ? 0 : this.getMaxUndefinedPlasmaFlow() + 99;
     }
 
 }

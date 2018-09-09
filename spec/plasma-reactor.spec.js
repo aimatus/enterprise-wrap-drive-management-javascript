@@ -97,6 +97,15 @@ describe('PlasmaReactor', function() {
         expect(result).to.deep.equal(expectedResult);
     });
 
+    it('should return proper plasma flow array for injectors and remaining time when when not enough power', function() {
+        const lightSpeedPercentage = 100;
+        const plasmaInjectors = getPlasmaInjectors(60, 60, 100);
+        const expectedResult = { plasmaInjectorsFlow: 'Unable to comply', remainingTime: '0 minutes' }
+        const plasmaReactor = new PlasmaReactor(plasmaInjectors);
+        const result = plasmaReactor.calculateInjectorsPlasmaFlow(lightSpeedPercentage);
+        expect(result).to.deep.equal(expectedResult);
+    });
+
     getPlasmaInjectors = (firstInjectorDamage, secondInjectorDamage, thirdInjectorDamage) => {
         return [
             new PlasmaInjector(firstInjectorDamage),
