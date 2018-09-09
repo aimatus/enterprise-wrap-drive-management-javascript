@@ -1,8 +1,8 @@
-# ** ENTERPRISE WRAP DRIVE MANAGEMENT **
+# **ENTERPRISE WRAP DRIVE MANAGEMENT**
 
 Enterprise Wrap Drive management exercise developed with NodeJS and ES6
 
-## Getting Started
+## **Getting Started**
 
 This project needs NPM and NodeJS > 8 in order to work.
 
@@ -12,7 +12,7 @@ To install dependencies run the following command inside project directory:
 npm install
 ```
 
-## Running the App
+## **Running the App**
 
 To run the app just execute the following command:
 
@@ -41,7 +41,7 @@ The output should be something like this:
 |----------------------------------------------------|
 ```
 
-## Running the Tests
+## **Running the Tests**
 
 To run the entire test suite run the following command:
 
