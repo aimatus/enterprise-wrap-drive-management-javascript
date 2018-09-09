@@ -12,9 +12,11 @@ class PlasmaReactor {
         const requiredPlasmaFlow = lightSpeedPercentage * plasmaFlowLightSpeedRatio;
         let plasmaInjectorsRequiredFlows = [];
         let currentPlasmaReactorFlow = 0;
+        let injectorFlows = null;
+        let remainingTime = null;
 
         if (this.getTotalReactorsMaxAvailablePlasmaFlow() < requiredPlasmaFlow) {
-            return 'Unable to comply';
+            injectorFlows = 'Unable to comply';
         }
 
         this.plasmmaInjectors.map((plasmaInjector) => {
@@ -23,9 +25,17 @@ class PlasmaReactor {
             currentPlasmaReactorFlow += maxUndefinedPlasmaFlow;
         });
 
-        const necessaryExtraPlasmaFlow = (requiredPlasmaFlow - currentPlasmaReactorFlow) / this.getWorkingPlasmaInjectorsQuantity(plasmaInjectorsRequiredFlows);
+        const plasmaDifference = requiredPlasmaFlow - currentPlasmaReactorFlow;
+        const necessaryExtraPlasmaFlow = Math.round((plasmaDifference / this.getWorkingPlasmaInjectorsQuantity(plasmaInjectorsRequiredFlows)) * 100) / 100;   
+        injectorFlows = injectorFlows ? injectorFlows : this.getFinalInjectorsFlows(plasmaInjectorsRequiredFlows, necessaryExtraPlasmaFlow);
 
-        return this.getFinalInjectorsFlows(plasmaInjectorsRequiredFlows, necessaryExtraPlasmaFlow);
+        if (necessaryExtraPlasmaFlow <= 0) {
+            remainingTime = 'Infinite'
+        } else {
+            remainingTime = this.getRemainingTravelTime(injectorFlows);
+        }
+
+        return { plasmaInjectorsFlow: injectorFlows, remainingTime: remainingTime }
     }
 
     getTotalReactorsMaxAvailablePlasmaFlow() {
@@ -59,19 +69,18 @@ class PlasmaReactor {
     }
 
     getRemainingTravelTime(injectorPlasmaFlows) {
-        let remainingTime = 100;
+        let remainingTime = null;
         if (injectorPlasmaFlows === 'Unable to comply') {
             return '0 minutes';
         }
         for (let index = 0; index < this.plasmmaInjectors.length; index++) {
-            const damagePercentage = this.plasmmaInjectors[index].getDamagePercentage();
-            if ( damagePercentage < 100 && injectorPlasmaFlows[index] > 100) {
-                const timeConsumed =  injectorPlasmaFlows[index] -100;
-                remainingTime -= timeConsumed;
+            let damagePercentage = this.plasmmaInjectors[index].getDamagePercentage();
+            if ( damagePercentage < 100) {
+                remainingTime = remainingTime ? remainingTime : 200.00 - (Math.round(damagePercentage) + Math.round(injectorPlasmaFlows[index] * 100) / 100);
                 break;
             }
         }
-        return remainingTime === 100 ? 'Infinite' : remainingTime + ' minutes';
+        return remainingTime + ' minutes';
     }
 }
 

@@ -9,16 +9,16 @@ const calculatePlasmaReactorOptimalSettings = () => {
         new PlasmaInjector(process.argv[4])
     ]
     const plasmaReactor = new PlasmaReactor(plasmaInjectors);
-    const plasmaInjectorsFlow = plasmaReactor.calculateInjectorsPlasmaFlow(process.argv[5]);
-    const remainingTime = plasmaReactor.getRemainingTravelTime(plasmaInjectorsFlow);
+    const result = plasmaReactor.calculateInjectorsPlasmaFlow(process.argv[5]);
+    const remainingTime = plasmaReactor.getRemainingTravelTime(result);
     console.log('|----------------------------------------------------|'.green);
     console.log('|---------- '.green + 'ENTERPRISE WRAP DRIVE MANAGEMENT'.red + ' --------|'.green);
     console.log('|----------------------------------------------------|'.green);
     console.log('|  '.green + 'Plasma Injectors (A, B, C)'.yellow + '                        |'.green);
     console.log('|----------------------------------------------------|'.green);
-    console.log('|    A: ' + plasmaInjectorsFlow[0] + 'mg/s', '   |    B: ' + plasmaInjectorsFlow[1] + 'mg/s', '  |   C: ' + plasmaInjectorsFlow[2] + 'mg/s');
+    console.log('|  A: ' + result.plasmaInjectorsFlow[0] + 'mg/s', '  |  B: ' + result.plasmaInjectorsFlow[1] + 'mg/s', '  |  C: ' + result.plasmaInjectorsFlow[2] + 'mg/s');
     console.log('|----------------------------------------------------|'.green);
-    console.log('| Remaining working time: '.blue + remainingTime);
+    console.log('| Remaining working time: '.blue + result.remainingTime);
     console.log('|----------------------------------------------------|'.green);
 }
 
