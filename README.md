@@ -17,15 +17,15 @@ npm install
 To run the app just execute the following command:
 
 ``` sh
-node index.js 20 10 0 100
+node index.js --injectors 20 10 0 --lightspeed 100
 ```
 
 Where:
 
-* First argument is damage percentage of first plasma injector
-* Second argument is damage percentage of first second injector
-* Third argument is damage percentage of first third injector
-* Fourth and last argument is light speed percentage
+* First `injectors` argument is damage percentage of first plasma injector
+* Second `injectors` argument is damage percentage of second injector
+* Third `injectors` argument is damage percentage of third injector
+* `lightspeed` argument and last argument is light speed percentage
 
 The output should be something like this:
 

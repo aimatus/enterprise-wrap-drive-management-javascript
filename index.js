@@ -1,16 +1,23 @@
 const PlasmaReactor = require('./src/plasma-reactor');
 const PlasmaInjector = require('./src/plasma-injector');
 const colors = require('colors');
+const commandLineArgs = require('command-line-args')
+
+const optionDefinitions = [
+    { name: 'injectors', alias: 'i', multiple: true, type: Number },
+    { name: 'lightspeed', alias: 'l', type: Number }
+];
+
+const params = commandLineArgs(optionDefinitions);
 
 const calculatePlasmaReactorOptimalSettings = () => {
     const plasmaInjectors = [
-        new PlasmaInjector(process.argv[2]),
-        new PlasmaInjector(process.argv[3]),
-        new PlasmaInjector(process.argv[4])
+        new PlasmaInjector(params.injectors[0]),
+        new PlasmaInjector(params.injectors[1]),
+        new PlasmaInjector(params.injectors[2])
     ]
     const plasmaReactor = new PlasmaReactor(plasmaInjectors);
-    const result = plasmaReactor.calculateInjectorsPlasmaFlow(process.argv[5]);
-    const remainingTime = plasmaReactor.getRemainingTravelTime(result);
+    const result = plasmaReactor.calculateInjectorsPlasmaFlow(params.lightspeed);
     console.log('|----------------------------------------------------|'.green);
     console.log('|---------- '.green + 'ENTERPRISE WRAP DRIVE MANAGEMENT'.red + ' --------|'.green);
     console.log('|----------------------------------------------------|'.green);
