@@ -14,15 +14,20 @@ class PlasmaInjector {
     }
 
     getRemainingWorkingTimeInMinutes(desiredExtraPlasmaFlow) {
+        const noExtraPlasmaFlowTime = 'infinite';
         const noWorkingTime = 0;
         if (this.damagePercentage === 100) { return noWorkingTime; }
         const hasNoExtraPlasmaFlow = desiredExtraPlasmaFlow === undefined;
         const remainingWorkingTimeInMinutes = 100 - desiredExtraPlasmaFlow;
-        return hasNoExtraPlasmaFlow ? 'infinite' : remainingWorkingTimeInMinutes;
+        return hasNoExtraPlasmaFlow ? noExtraPlasmaFlowTime : remainingWorkingTimeInMinutes;
     }
 
     getMaxPlasmaFlow() {
-        return this.damagePercentage === 100 ? 0 : this.getMaxUndefinedPlasmaFlow() + 99;
+        const maxExtraAvailablePlasmaFlow = 99;
+        const totallyDamaged = 100;
+        const noPlasmaFlow = 0;
+        const maxAvailablePlasmaFlow = this.getMaxUndefinedPlasmaFlow() + maxExtraAvailablePlasmaFlow;
+        return this.damagePercentage === totallyDamaged ? noPlasmaFlow : maxAvailablePlasmaFlow;
     }
 
 }

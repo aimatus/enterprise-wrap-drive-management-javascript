@@ -29,11 +29,7 @@ class PlasmaReactor {
         const necessaryExtraPlasmaFlow = Math.round((plasmaDifference / this.getWorkingPlasmaInjectorsQuantity(plasmaInjectorsRequiredFlows)) * 100) / 100;   
         injectorFlows = this.getFinalInjectorsFlows(plasmaInjectorsRequiredFlows, necessaryExtraPlasmaFlow);
 
-        if (necessaryExtraPlasmaFlow <= 0) {
-            remainingTime = 'Infinite'
-        } else {
-            remainingTime = this.getRemainingTravelTime(injectorFlows);
-        }
+        remainingTime = necessaryExtraPlasmaFlow > 0 ? this.getRemainingTravelTime(injectorFlows) : 'Infinite'
 
         return { plasmaInjectorsFlow: injectorFlows, remainingTime: remainingTime }
     }
@@ -69,18 +65,15 @@ class PlasmaReactor {
     }
 
     getRemainingTravelTime(injectorPlasmaFlows) {
-        let remainingTime = null;
-        if (injectorPlasmaFlows === 'Unable to comply') {
-            return '0 minutes';
-        }
+        const totallyDamagedPercentage = 100;
         for (let index = 0; index < this.plasmmaInjectors.length; index++) {
             let damagePercentage = this.plasmmaInjectors[index].getDamagePercentage();
-            if ( damagePercentage < 100) {
-                remainingTime = remainingTime ? remainingTime : 200.00 - (Math.round(damagePercentage) + Math.round(injectorPlasmaFlows[index] * 100) / 100);
-                break;
+            if ( damagePercentage < totallyDamagedPercentage) {
+                const remainingTime = 200.00 - (Math.round(damagePercentage) + Math.round(injectorPlasmaFlows[index] * 100) / 100);
+                return remainingTime + ' minutes';
             }
         }
-        return remainingTime + ' minutes';
+        return null;
     }
 }
 
